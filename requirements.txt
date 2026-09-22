@@ -1,0 +1,17 @@
+google-genai
+gradio>=6.0.0,<7
+streamlit
+asyncio
+aiofiles
+pillow
+numpy
+tqdm
+json_repair
+anthropic
+openai
+matplotlib
+python-dotenv
+pyyaml
+google-auth
+huggingface_hub
+ijson

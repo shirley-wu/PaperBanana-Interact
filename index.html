@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PaperBanana-Interact: Scientific Diagram Refinement with Multi-Turn Human Feedback. MTPaperBananaBench benchmark and a multi-agent refinement system.">
+  <meta property="og:title" content="PaperBanana-Interact">
+  <meta property="og:description" content="Scientific Diagram Refinement with Multi-Turn Human Feedback">
+  <meta property="og:url" content="https://shirley-wu.github.io/PaperBanana-Interact/">
+  <meta property="og:image" content="assets/teaser_wide.png">
+  <title>PaperBanana-Interact: Scientific Diagram Refinement with Multi-Turn Human Feedback</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Noto Sans', sans-serif;
+    }
+    .publication-title, .title, .subtitle, .publication-authors {
+      font-family: 'Google Sans', sans-serif;
+    }
+    .publication-title {
+      font-size: 2.1rem;
+      font-weight: 700;
+    }
+    .publication-authors {
+      font-size: 1.15rem;
+    }
+    .publication-authors a {
+      color: hsl(204, 86%, 53%) !important;
+    }
+    .publication-authors a:hover {
+      text-decoration: underline;
+    }
+    .author-block {
+      display: inline-block;
+      margin-right: 0.4em;
+    }
+    .publication-venue {
+      color: #555;
+      font-size: 1.1rem;
+    }
+    .link-block {
+      display: inline-block;
+      margin: 0.2em;
+    }
+    .link-block .button {
+      border-radius: 9999px;
+      background-color: #363636;
+      color: #fff;
+    }
+    .link-block .button:hover {
+      background-color: #4a4a4a;
+      color: #fff;
+    }
+    .link-block .button .icon {
+      margin-right: 0.35em;
+    }
+    .teaser img, .figure-img {
+      max-width: 100%;
+      height: auto;
+    }
+    .figure-caption {
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: 0.75em;
+      text-align: left;
+    }
+    .content p {
+      text-align: justify;
+    }
+    .highlight-red {
+      color: #c0392b;
+      font-weight: 600;
+    }
+    .highlight-green {
+      color: #1e8449;
+      font-weight: 600;
+    }
+    .results-carousel {
+      overflow: hidden;
+    }
+    .results-carousel .box img {
+      width: 84%;
+    }
+    .results-carousel .content p {
+      text-align: center;
+    }
+    .bibtex-box pre {
+      text-align: left;
+      overflow-x: auto;
+    }
+    footer.footer {
+      padding: 2rem 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ======================= Hero: title / authors / links ======================= -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="publication-title">
+            PaperBanana-Interact: Scientific Diagram Refinement<br>with Multi-Turn Human Feedback
+          </h1>
+
+          <div class="is-size-5 publication-authors" style="margin-top: 1rem;">
+            <span class="author-block"><a href="https://shirley-wu.github.io/">Xueqing Wu</a><sup>1 2 *</sup>,</span>
+            <span class="author-block">Ashwin Balasubramanian<sup>2</sup>,</span>
+            <span class="author-block">Bingxuan Li<sup>2 3</sup>,</span>
+            <span class="author-block">Dawei Zhu<sup>4</sup>,</span>
+            <span class="author-block"><a href="http://web.cs.ucla.edu/~kwchang/">Kai-Wei Chang</a><sup>1</sup>,</span>
+            <span class="author-block">Yale Song<sup>2</sup>,</span>
+            <span class="author-block">Yiwen Song<sup>2</sup>,</span>
+            <span class="author-block">Rui Meng<sup>2</sup>,</span>
+            <span class="author-block"><a href="https://violetpeng.github.io/">Nanyun Peng</a><sup>2</sup></span>
+          </div>
+
+          <div class="is-size-6 publication-authors" style="margin-top: 0.5rem;">
+            <span class="author-block"><sup>1</sup>University of California, Los Angeles</span>&nbsp;
+            <span class="author-block"><sup>2</sup>Google</span>&nbsp;
+            <span class="author-block"><sup>3</sup>University of Illinois Urbana-Champaign</span>&nbsp;
+            <span class="author-block"><sup>4</sup>Peking University</span>
+          </div>
+
+          <div class="is-size-7" style="margin-top: 0.5rem; color: #777;">
+            <sup>*</sup>Work done while Xueqing was a student researcher at Google Cloud AI Research.
+          </div>
+
+          <div class="publication-links" style="margin-top: 1.25rem;">
+            <span class="link-block">
+              <a href="https://arxiv.org/abs/2608.30241" class="button is-normal">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://arxiv.org/pdf/2608.30241" class="button is-normal">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/shirley-wu/PaperBanana-Interact" class="button is-normal">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://huggingface.co/datasets/xqwu/MTPaperBananaBench" class="button is-normal">
+                <span class="icon"><i class="fas fa-database"></i></span>
+                <span>Benchmark</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://huggingface.co/spaces/xqwu/pb-interact-demo" class="button is-normal">
+                <span class="icon"><i class="fas fa-rocket"></i></span>
+                <span>Demo</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Teaser ======================= -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body" style="padding-top: 0;">
+      <img src="assets/teaser_wide.png" alt="PaperBanana-Interact teaser" class="figure-img">
+      <p class="figure-caption">
+        Diagram generators may fail to fully satisfy user preferences in a single turn, necessitating
+        multi-turn refinement with human feedback. We introduce <b>MTPaperBananaBench</b> to benchmark this
+        task, and propose <b>PaperBanana-Interact</b> to mitigate common failure modes in baseline systems.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Abstract ======================= -->
+<section class="section" style="background-color: #f5f5f5;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent efforts have aimed to automate scientific diagram generation from paper content.
+            However, fully satisfying an author's visual and communicative preferences in a single turn is
+            challenging: in our formative user study (N = 14), all participants requested further revisions
+            after viewing an initial draft, and 86% of them rated the refined diagrams as more satisfactory.
+            Despite the clear demand, this multi-turn workflow remains largely underexplored. To bridge this
+            gap, we present <b>MTPaperBananaBench</b>, a benchmark for multi-turn diagram generation containing
+            292 images annotated with 3,518 user requirements. To avoid expensive human studies and enable
+            scalable benchmarking, we construct a user simulator that, at each turn, identifies unsatisfied
+            requirements and converts <i>k</i> of them into natural language feedback. Evaluating both
+            requirement satisfaction and overall diagram quality reveals two key failure modes shared across
+            baseline systems: (1) <b>quality drift</b>, where diagram quality progressively declines over
+            turns, and (2) <b>forgetting</b>, where previously implemented features are lost in subsequent
+            turns. To address these issues, we introduce <b>PaperBanana-Interact</b>, a multi-agent system
+            that refines diagrams via an internal critique-and-refine loop. PaperBanana-Interact consistently
+            improves rather than degrades diagram quality across iterations, outperforming baselines by
+            11.9&ndash;18.6 points in quality score and reducing forgetting by 3.7&ndash;6.2 points.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Benchmark ======================= -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">MTPaperBananaBench: Benchmarking Multi-Turn Diagram Refinement</h2>
+      </div>
+    </div>
+
+    <div class="content">
+      <p>
+        At the core of the benchmark is an interaction process in which user requirements gradually emerge as
+        the diagram evolves. Since collecting human interactions at scale is prohibitively expensive and hard
+        to standardize, we develop a <b>user simulator</b> driven by a pool of requirements hidden from the
+        diagram generator at the initial turn. At each subsequent turn, the simulator identifies unfulfilled
+        requirements, spanning content, layout, and visual representation, and formulates <i>k</i> of them into
+        natural language feedback. The final diagram is evaluated on (1) satisfaction of the user requirements
+        and (2) overall diagram quality.
+      </p>
+      <img src="assets/user_simulator.png" alt="Annotation and inference pipeline of MTPaperBananaBench" class="figure-img">
+      <p class="figure-caption">
+        Annotation and inference pipeline of MTPaperBananaBench. The multi-turn interaction is driven by a
+        user simulator that converts unsatisfied requirements into natural language feedback at each turn.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Failure modes ======================= -->
+<section class="section" style="background-color: #f5f5f5;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Baselines Suffer from Quality Drift and Forgetting</h2>
+      </div>
+    </div>
+    <div class="content">
+      <p>
+        Baseline systems, including leading generative models (NanoBananaPro, GPT-Image-2) and an agentic
+        baseline (PaperBanana-DirectRefine), effectively address refinement requests on individual turns:
+        satisfaction rates reach 68.6% for PaperBanana-DirectRefine and 56.2% for NanoBananaPro.
+      </p>
+      <p>
+        However, their performance degrades significantly across multi-turn interactions. Failure analysis
+        reveals two key failure modes:
+      </p>
+      <ul style="text-align: left;">
+        <li>
+          <span class="highlight-red">Quality drift</span>: image quality progressively deteriorates over
+          turns (50.3 &rarr; 19.0 for NanoBananaPro; 50.3 &rarr; 47.1 for PaperBanana-DirectRefine).
+        </li>
+        <li>
+          <span class="highlight-red">Forgetting</span>: later refinements overwrite previously satisfied
+          requests, affecting 14.1&ndash;22.9% of such requests across all baselines.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Method ======================= -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">PaperBanana-Interact</h2>
+      </div>
+    </div>
+    <div class="content">
+      <p>
+        <b>PaperBanana-Interact</b> is a multi-agent system that refines diagrams via an internal
+        critique-and-refine loop. A <b>critic</b> reviews each revision and proposes suggestions, and a
+        <b>refiner</b> and a <b>visualizer</b> generate the next revision accordingly. PaperBanana-Interact
+        features two key designs:
+      </p>
+      <ul style="text-align: left;">
+        <li>
+          A <b>multi-objective critic</b> assesses the diagram against multiple constraints: the current user
+          request, all prior user requests, adherence to the source context, and presentation quality.
+        </li>
+        <li>
+          A <b>summarizer</b> compresses the long, multi-image interaction history into a compact textual
+          memory capturing relevant visual details, shared across all subsequent agents.
+        </li>
+      </ul>
+      <img src="assets/method.png" alt="PaperBanana-Interact overview" class="figure-img">
+      <p class="figure-caption">
+        PaperBanana-Interact overview. A summarizer compresses the interaction history into textual memory;
+        an internal loop of multi-objective critic, refiner, and visualizer produces each revision.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Results ======================= -->
+<section class="section" style="background-color: #f5f5f5;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results</h2>
+      </div>
+    </div>
+    <div class="content">
+      <p>
+        On MTPaperBananaBench, PaperBanana-Interact <span class="highlight-green">consistently improves rather
+        than degrades</span> diagram quality across iterations. It outperforms baselines by
+        <span class="highlight-green">11.9&ndash;18.6 points</span> in quality score and reduces the
+        forgetting rate by <span class="highlight-green">3.7&ndash;6.2 points</span>, mitigating both quality
+        drift and forgetting.
+      </p>
+
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <img src="assets/table1.png" alt="Main results with the k = 1 user simulator">
+            <p>
+              Main results with the <i>k</i> = 1 user simulator. PaperBanana-Interact achieves the best
+              diagram quality while reducing forgetting.
+            </p>
+          </div>
+        </div>
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <img src="assets/table2.png" alt="Main results with the k = 3 user simulator">
+            <p>
+              Main results with the <i>k</i> = 3 user simulator.
+            </p>
+          </div>
+        </div>
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <img src="assets/per_turn.png" alt="Diagram quality across refinement turns" style="width: 68%; margin-bottom: 0.75rem;">
+            <p>
+              Diagram quality across refinement turns. Baseline quality drifts downward over turns, while
+              PaperBanana-Interact steadily improves.
+            </p>
+          </div>
+        </div>
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <img src="assets/per_dimension.png" alt="Final diagram quality across dimensions" style="width: 68%; margin-bottom: 0.75rem;">
+            <p>
+              Breakdown of final diagram quality across quality dimensions: NanoBananaPro drifts severely
+              on all dimensions, and PaperBanana-DirectRefine
+              mostly degrades conciseness and readability, while PaperBanana-Interact mitigates drift by
+              iteratively refining the visual design.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Example Trajectory ======================= -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Example Trajectory</h2>
+      </div>
+    </div>
+    <div class="content">
+      <p>
+        Below is a complete refinement trajectory produced by PaperBanana-Interact, one turn per slide.
+        Each slide shows the user feedback given at that turn, followed by the diagram the system produces
+        in response. Starting from the initial draft at <i>t</i> = 0, the user raises a new requirement at
+        every turn, and PaperBanana-Interact satisfies it while
+        <span class="highlight-green">preserving the requirements met in earlier turns</span>, so the diagram
+        improves steadily instead of drifting.
+      </p>
+
+      <div id="example-carousel" class="carousel results-carousel">
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <img src="assets/full_example_t0.png" alt="Turn t = 0: the initial draft">
+          </div>
+        </div>
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <img src="assets/full_example_t1.png" alt="Turn t = 1: user feedback and the resulting diagram">
+          </div>
+        </div>
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <img src="assets/full_example_t2.png" alt="Turn t = 2: user feedback and the resulting diagram">
+          </div>
+        </div>
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <img src="assets/full_example_t3.png" alt="Turn t = 3: user feedback and the resulting diagram">
+          </div>
+        </div>
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <img src="assets/full_example_t4.png" alt="Turn t = 4: user feedback and the resulting diagram">
+          </div>
+        </div>
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <img src="assets/full_example_t5.png" alt="Turn t = 5: user feedback and the resulting diagram">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container is-max-desktop">
+  <hr>
+</div>
+
+<!-- ======================= BibTeX ======================= -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content bibtex-box">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre><code>@misc{wu2026paperbananainteractscientificdiagramrefinement,
+      title={PaperBanana-Interact: Scientific Diagram Refinement with Multi-Turn Human Feedback}, 
+      author={Xueqing Wu and Ashwin Balasubramanian and Bingxuan Li and Dawei Zhu and Kai-Wei Chang and Yale Song and Yiwen Song and Rui Meng and Tomas Pfister and Nanyun Peng},
+      year={2026},
+      eprint={2608.30241},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2608.30241}, 
+}</code></pre>
+  </div>
+</section>
+
+<!-- ======================= Footer ======================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p style="font-size: 0.9rem; color: #777;">
+            This website is licensed under a
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+            Attribution-ShareAlike 4.0 International License</a>.
+            Template adapted from the <a href="https://nerfies.github.io/">Nerfies</a> project page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    bulmaCarousel.attach('.carousel', {
+      slidesToScroll: 1,
+      slidesToShow: 1,
+      loop: true,
+      infinite: true,
+      autoplay: false,
+      autoplaySpeed: 3000,
+    });
+  });
+</script>
+
+</body>
+</html>
