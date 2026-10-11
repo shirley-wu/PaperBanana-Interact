@@ -1,5 +1,5 @@
 # <div align="center">⭐&nbsp;&nbsp;PaperBanana-Interact&nbsp;&nbsp;⭐</div>
-<div align="center">Xueqing Wu, Ashwin Balasubramanian, Dawei Zhu, Bingxuan Li, Kai-Wei Chang, Yale Song, Yiwen Song, Rui Meng, Nanyun Peng
+<div align="center">Xueqing Wu, Ashwin Balasubramanian, Bingxuan Li, Dawei Zhu, Kai-Wei Chang, Yale Song, Yiwen Song, Rui Meng, Tomas Pfister, Nanyun Peng
 <br><br>
 
 <a href="https://arxiv.org/abs/2608.30241"><img src="https://img.shields.io/badge/arXiv-2608.30241-b31b1b.svg" alt="arXiv"></a>
